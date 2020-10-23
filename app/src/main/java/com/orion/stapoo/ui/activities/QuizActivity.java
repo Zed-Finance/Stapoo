@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -162,8 +163,12 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                     QuestionObject questionObject = questionList.get(currPosition - 1);
                     if (!questionObject.getCorrectOption().equals(selectedOptionPos)) {
                         answerView(selectedOptionPos, R.drawable.wrong_option_bg);
+                        final MediaPlayer mp = MediaPlayer.create(this, R.raw.wrong_buzzer);
+                        mp.start();
                     } else {
                         correctAnsNum++;
+                        final MediaPlayer mp = MediaPlayer.create(this, R.raw.correct_buzzer);
+                        mp.start();
                     }
                     answerView(questionObject.getCorrectOption(), R.drawable.correct_option_bg);
 
