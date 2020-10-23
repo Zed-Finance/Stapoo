@@ -35,20 +35,28 @@ public class AvatarActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    private void navigateFurther(){
+        //startActivity();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.avatar_1:
                 prefManager.setAvatar(0);
+                prefManager.setIsAvatarChosen(true);
                 break;
             case R.id.avatar_2:
                 prefManager.setAvatar(1);
+                prefManager.setIsAvatarChosen(true);
                 break;
             case R.id.avatar_3:
                 prefManager.setAvatar(2);
+                prefManager.setIsAvatarChosen(true);
                 break;
             case R.id.avatar_4:
                 prefManager.setAvatar(3);
+                prefManager.setIsAvatarChosen(true);
                 break;
         }
     }
