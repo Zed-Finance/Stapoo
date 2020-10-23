@@ -45,7 +45,7 @@ public class TaskActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
+
 
 }

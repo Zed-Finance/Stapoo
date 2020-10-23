@@ -29,7 +29,7 @@ public class JourneyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TaskActivity.class);
                 intent.putExtra("subject", subject);
-                intent.putExtra("day", "1");
+                intent.putExtra("day", "0");
                 startActivity(intent);
             }
         });
@@ -39,7 +39,7 @@ public class JourneyActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TaskActivity.class);
                 intent.putExtra("subject", subject);
-                intent.putExtra("day", "2");
+                intent.putExtra("day", "1");
                 startActivity(intent);
             }
         });

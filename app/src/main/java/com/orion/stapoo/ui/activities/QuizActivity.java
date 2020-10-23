@@ -79,7 +79,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void fetchQuestions() {
-        FirebaseDatabase.getInstance().getReference().child("subjects").child(subject).child("quiz").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("subjects").child(subject).child(day).child("quiz").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 questionList.clear();
