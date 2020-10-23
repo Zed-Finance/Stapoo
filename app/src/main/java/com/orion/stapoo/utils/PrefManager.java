@@ -36,11 +36,14 @@ public class PrefManager {
         return pref.getBoolean(IS_DETAILS_ENTERED, false);
     }
 
-    public void setAvatar(int num){
+    public int getChosenAvatar() {
+        return pref.getInt("avatar", 0);
+    }
+
+    public void setAvatar(int num) {
         editor.putInt("avatar", num);
         editor.commit();
     }
-
 
 
 }
