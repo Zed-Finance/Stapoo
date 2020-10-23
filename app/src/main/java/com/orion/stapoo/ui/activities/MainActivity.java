@@ -27,6 +27,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        startActivity(new Intent(getApplicationContext(),AvatarActivity.class));
+        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
     }
 }

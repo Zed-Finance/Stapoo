@@ -27,6 +27,15 @@ public class PrefManager {
         return pref.getBoolean(IS_LOGGED_IN, false);
     }
 
+    public void setUsername(String username) {
+        editor.putString("username", username);
+        editor.commit();
+    }
+
+    public String getUsername() {
+        return pref.getString("username", null);
+    }
+
     public void setIsAvatarChosen(boolean isDetailsEntered) {
         editor.putBoolean(IS_DETAILS_ENTERED, isDetailsEntered);
         editor.commit();
