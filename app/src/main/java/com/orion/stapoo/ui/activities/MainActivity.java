@@ -26,5 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), QuizActivity.class));
             }
         });
+
+        startActivity(new Intent(getApplicationContext(),LoginActivity.class));
     }
 }
