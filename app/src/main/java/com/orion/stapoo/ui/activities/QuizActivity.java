@@ -38,15 +38,20 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private Integer selectedOptionPos = 0;
     private Button btnSubmit;
     private Integer correctAnsNum = 0;
+    private String subject;
+    private String day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        subject = getIntent().getStringExtra("subject");
+        day = getIntent().getStringExtra("day");
+
+
         initView();
         fetchQuestions();
-
 
         cardViewOne.setOnClickListener(this);
         cardViewTwo.setOnClickListener(this);
@@ -74,7 +79,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void fetchQuestions() {
-        FirebaseDatabase.getInstance().getReference().child("subjects").child("maths").child("quiz").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("subjects").child(subject).child("quiz").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 questionList.clear();

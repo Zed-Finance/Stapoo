@@ -2,6 +2,7 @@ package com.orion.stapoo.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,10 +22,10 @@ public class AvatarActivity extends AppCompatActivity implements View.OnClickLis
 
         prefManager = new PrefManager(this);
 
-        ImageView avatar1=findViewById(R.id.avatar_1);
-        ImageView avatar2=findViewById(R.id.avatar_2);
-        ImageView avatar3=findViewById(R.id.avatar_3);
-        ImageView avatar4=findViewById(R.id.avatar_4);
+        ImageView avatar1 = findViewById(R.id.avatar_1);
+        ImageView avatar2 = findViewById(R.id.avatar_2);
+        ImageView avatar3 = findViewById(R.id.avatar_3);
+        ImageView avatar4 = findViewById(R.id.avatar_4);
 
         avatar1.setOnClickListener(this);
         avatar2.setOnClickListener(this);
@@ -35,8 +36,9 @@ public class AvatarActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void navigateFurther(){
-        //startActivity();
+    private void navigateFurther() {
+        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+        finish();
     }
 
     @Override
@@ -45,18 +47,22 @@ public class AvatarActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.avatar_1:
                 prefManager.setAvatar(0);
                 prefManager.setIsAvatarChosen(true);
+                navigateFurther();
                 break;
             case R.id.avatar_2:
                 prefManager.setAvatar(1);
                 prefManager.setIsAvatarChosen(true);
+                navigateFurther();
                 break;
             case R.id.avatar_3:
                 prefManager.setAvatar(2);
                 prefManager.setIsAvatarChosen(true);
+                navigateFurther();
                 break;
             case R.id.avatar_4:
                 prefManager.setAvatar(3);
                 prefManager.setIsAvatarChosen(true);
+                navigateFurther();
                 break;
         }
     }
