@@ -14,15 +14,19 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.orion.stapoo.R;
+import com.orion.stapoo.utils.PrefManager;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +34,10 @@ public class VideoActivity extends AppCompatActivity {
 
     YouTubePlayerView youTubePlayerView;
     Button gotoQuiz;
+    String subject;
+    String day;
+    List<String> watchList;
+    String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +47,14 @@ public class VideoActivity extends AppCompatActivity {
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         getLifecycle().addObserver(youTubePlayerView);
 
-        fetchAndPlayVideo(getIntent().getStringExtra("subject"), getIntent().getStringExtra("day"));
+        watchList = new ArrayList<>();
+
+        subject = getIntent().getStringExtra("subject");
+        day = getIntent().getStringExtra("day");
+        username = new PrefManager(this).getUsername();
+
+
+        fetchAndPlayVideo(subject, day);
 
         gotoQuiz = findViewById(R.id.btn_quiz);
         gotoQuiz.setOnClickListener(new View.OnClickListener() {
@@ -84,9 +99,31 @@ public class VideoActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                int color = Color.parseColor("#FF76C8");
-                gotoQuiz.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC));
-                gotoQuiz.setEnabled(true);
+                FirebaseDatabase.getInstance().getReference().child("subjects").child(subject).child(day).child("watchList").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        watchList.clear();
+                        if (snapshot.exists()) {
+                            for (DataSnapshot snapshot1 : snapshot.getChildren()) {
+                                watchList.add(snapshot1.getValue(String.class));
+                            }
+                        }
+                        watchList.add(username);
+                        FirebaseDatabase.getInstance().getReference().child("subjects").child(subject).child(day).child("watchList").setValue(watchList).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                int color = Color.parseColor("#FF76C8");
+                                gotoQuiz.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC));
+                                gotoQuiz.setEnabled(true);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         }, 5000);
     }

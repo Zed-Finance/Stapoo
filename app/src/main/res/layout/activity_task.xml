@@ -82,6 +82,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_proof"
                 android:layout_width="255dp"
                 android:layout_height="245dp"
                 android:layout_gravity="center"

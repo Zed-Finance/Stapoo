@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.orion.stapoo.R;
 import com.orion.stapoo.models.QuestionObject;
+import com.orion.stapoo.utils.PrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private Integer correctAnsNum = 0;
     private String subject;
     private String day;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         subject = getIntent().getStringExtra("subject");
         day = getIntent().getStringExtra("day");
+        username = new PrefManager(this).getUsername();
 
 
         initView();
@@ -161,6 +164,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         Intent intent = new Intent(this, ResultActivity.class);
                         intent.putExtra("score", correctAnsNum.toString());
+                        FirebaseDatabase.getInstance().getReference().child("subjects").child(subject).child(day).child("scoreList").child(username).setValue(correctAnsNum.toString());
                         startActivity(intent);
                         finish();
                     }
