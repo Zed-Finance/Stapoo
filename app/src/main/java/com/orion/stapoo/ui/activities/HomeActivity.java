@@ -22,11 +22,20 @@ public class HomeActivity extends AppCompatActivity {
         final PrefManager prefManager = new PrefManager(this);
 
         CardView cardViewLearn = findViewById(R.id.card_view_learn);
+        CardView cardViewToolkit = findViewById(R.id.card_view_toolkit);
 
         cardViewLearn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), LearnActivity.class));
+                finish();
+            }
+        });
+
+        cardViewToolkit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ToolkitActivity.class));
                 finish();
             }
         });

@@ -79,6 +79,7 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_toolkit"
                 android:layout_width="255dp"
                 android:layout_height="245dp"
                 android:layout_gravity="center"
