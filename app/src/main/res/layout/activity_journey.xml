@@ -39,30 +39,32 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="70dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" >
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/img_flowchart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_flowchart_monument"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="16dp" />
 
             <Button
                 android:id="@+id/level_1"
-                android:background="@android:color/transparent"
                 android:layout_width="110dp"
                 android:layout_height="102dp"
+                android:background="@android:color/transparent"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.172"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/img_flowchart" />
 
             <Button
                 android:id="@+id/level_2"
@@ -73,8 +75,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.847"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/img_flowchart" />
 
+            <Button
+                android:id="@+id/level_3"
+                android:layout_width="110dp"
+                android:layout_height="102dp"
+                android:layout_marginTop="316dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.172"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_flowchart" />
+
+            <Button
+                android:id="@+id/level_4"
+                android:layout_width="110dp"
+                android:layout_height="102dp"
+                android:layout_marginTop="504dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.886"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_flowchart" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
