@@ -79,14 +79,48 @@ public class UploadProofActivity extends AppCompatActivity {
         btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (proofPicLink != null) {
-                    FirebaseDatabase.getInstance().getReference().child("subjects").child(subject).child(day).child("proofList").child(username).setValue(proofPicLink).addOnSuccessListener(new OnSuccessListener<Void>() {
+                if (filePath != null) {
+                    final ProgressDialog progressDialog
+                            = new ProgressDialog(UploadProofActivity.this);
+                    progressDialog.setTitle("Uploading...");
+                    progressDialog.show();
+
+                    final StorageReference reference = storageReference.child(UUID.randomUUID().toString());
+
+                    reference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(getApplicationContext(), "Proof uploaded successfully", Toast.LENGTH_LONG).show();
-                            finish();
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    proofPicLink = uri.toString();
+                                    progressDialog.dismiss();
+                                    FirebaseDatabase.getInstance().getReference().child("subjects").child(subject).child(day).child("proofList").child(username).setValue(proofPicLink).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(getApplicationContext(), "Proof uploaded successfully", Toast.LENGTH_LONG).show();
+                                            finish();
+                                        }
+                                    });
+
+                                }
+                            });
                         }
-                    });
+                    })
+                            .addOnCanceledListener(new OnCanceledListener() {
+                                @Override
+                                public void onCanceled() {
+                                    progressDialog.dismiss();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getApplicationContext(), "" + e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Please choose the image first", Toast.LENGTH_LONG).show();
                 }
@@ -117,44 +151,13 @@ public class UploadProofActivity extends AppCompatActivity {
 
     private void uploadImage() {
         if (filePath != null) {
-            final ProgressDialog progressDialog
-                    = new ProgressDialog(this);
-            progressDialog.setTitle("Choosing...");
-            progressDialog.show();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), filePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imgProofPic.setImageBitmap(bitmap);
 
-            final StorageReference reference = storageReference.child(UUID.randomUUID().toString());
-
-            reference.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            try {
-                                bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), filePath);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            imgProofPic.setImageBitmap(bitmap);
-                            proofPicLink = uri.toString();
-                            progressDialog.dismiss();
-                        }
-                    });
-                }
-            })
-                    .addOnCanceledListener(new OnCanceledListener() {
-                        @Override
-                        public void onCanceled() {
-                            progressDialog.dismiss();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            progressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "" + e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
 
         }
     }
