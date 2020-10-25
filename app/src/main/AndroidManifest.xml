@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.ToolkitActivity"></activity>
+        <activity android:name=".ui.activities.CourseMaterialActivity"></activity>
+        <activity android:name=".ui.activities.ToolkitVideoPlayActivity" />
+        <activity android:name=".ui.activities.ToolkitActivity" />
         <activity android:name=".ui.activities.UploadProofActivity" />
         <activity android:name=".ui.activities.VideoActivity" />
         <activity android:name=".ui.activities.HomeActivity" />

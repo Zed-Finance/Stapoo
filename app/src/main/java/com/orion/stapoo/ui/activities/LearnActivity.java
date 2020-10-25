@@ -19,12 +19,24 @@ public class LearnActivity extends AppCompatActivity {
         ImageView imgMaths = findViewById(R.id.img_maths);
         ImageView imgEnglish = findViewById(R.id.img_english);
 
+        ImageView home = findViewById(R.id.home);
+        ImageView speaker = findViewById(R.id.speaker);
+
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                finish();
+            }
+        });
+
         imgMaths.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), JourneyActivity.class);
                 intent.putExtra("subject", "maths");
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -34,6 +46,7 @@ public class LearnActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), JourneyActivity.class);
                 intent.putExtra("subject", "english");
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -23,7 +23,7 @@
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Your learning\nMaterials"
+        android:text="Your reference\nMaterials"
         android:textColor="@android:color/white"
         android:textSize="28sp"
         android:textStyle="bold"

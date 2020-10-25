@@ -1,7 +1,8 @@
 package com.orion.stapoo.interfaces;
 
-import com.orion.stapoo.models.OptionsModel;
+
+import com.orion.stapoo.models.ToolKitItem;
 
 public interface ClickInterface {
-    void optionClickInterface(OptionsModel optionsModel);
+    void cardClickInterface(String materialId);
 }

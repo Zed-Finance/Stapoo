@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -36,10 +38,21 @@ public class TaskActivity extends AppCompatActivity {
         watchlist = new ArrayList<>();
         username = new PrefManager(this).getUsername();
 
+        ImageView home = findViewById(R.id.home);
+        ImageView speaker = findViewById(R.id.speaker);
+
         CardView cardVideo = findViewById(R.id.card_video);
         CardView cardQuiz = findViewById(R.id.card_quiz);
+        CardView cardMaterial = findViewById(R.id.card_material);
         final CardView cardProof = findViewById(R.id.card_proof);
 
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                finish();
+            }
+        });
 
         cardQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +83,16 @@ public class TaskActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+        cardMaterial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CourseMaterialActivity.class);
+                intent.putExtra("subject", subject);
+                intent.putExtra("day", day);
+                startActivity(intent);
             }
         });
 

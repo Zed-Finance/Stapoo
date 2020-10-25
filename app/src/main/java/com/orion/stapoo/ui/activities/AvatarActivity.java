@@ -27,6 +27,9 @@ public class AvatarActivity extends AppCompatActivity implements View.OnClickLis
         ImageView avatar3 = findViewById(R.id.avatar_3);
         ImageView avatar4 = findViewById(R.id.avatar_4);
 
+
+        ImageView speaker=findViewById(R.id.speaker);
+
         avatar1.setOnClickListener(this);
         avatar2.setOnClickListener(this);
         avatar4.setOnClickListener(this);

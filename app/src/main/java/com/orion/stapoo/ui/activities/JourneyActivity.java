@@ -10,6 +10,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +40,12 @@ public class JourneyActivity extends AppCompatActivity implements View.OnClickLi
         subject = getIntent().getStringExtra("subject");
         username = new PrefManager(this).getUsername();
         proofListKeys = new ArrayList<>();
+
+        ImageView home = findViewById(R.id.home);
+        ImageView speaker = findViewById(R.id.speaker);
+
+        speaker.setOnClickListener(this);
+        home.setOnClickListener(this);
 
         Button levelOne = findViewById(R.id.level_1);
         Button levelTwo = findViewById(R.id.level_2);
@@ -75,6 +82,10 @@ public class JourneyActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.level_4:
                 day = 3;
                 checkPrevProgressAndNavigate(day.toString(), String.valueOf(day - 1));
+                break;
+            case R.id.home:
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                finish();
                 break;
 
         }
