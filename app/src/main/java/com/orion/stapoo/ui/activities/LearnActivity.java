@@ -25,8 +25,8 @@ public class LearnActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                 finish();
+
             }
         });
 
@@ -36,7 +36,6 @@ public class LearnActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), JourneyActivity.class);
                 intent.putExtra("subject", "maths");
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -46,7 +45,6 @@ public class LearnActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), JourneyActivity.class);
                 intent.putExtra("subject", "english");
                 startActivity(intent);
-                finish();
             }
         });
     }

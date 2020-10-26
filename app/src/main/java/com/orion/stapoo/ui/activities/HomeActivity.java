@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), LearnActivity.class));
-                finish();
+
             }
         });
 
@@ -36,7 +36,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), ToolkitActivity.class));
-                finish();
             }
         });
 
