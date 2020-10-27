@@ -57,9 +57,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="70dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        android:layout_marginTop="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,7 +69,7 @@
             <ImageView
                 android:id="@+id/img_flowchart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:src="@drawable/ic_flowchart_monument"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="16dp" />
