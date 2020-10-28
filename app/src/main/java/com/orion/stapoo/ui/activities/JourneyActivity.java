@@ -84,8 +84,8 @@ public class JourneyActivity extends AppCompatActivity implements View.OnClickLi
                 checkPrevProgressAndNavigate(day.toString(), String.valueOf(day - 1));
                 break;
             case R.id.home:
-//                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                finish();
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                finishAffinity();
                 break;
 
         }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +41,13 @@ public class LoginActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validateCredentials(edtUsername.getText().toString(), edtPassword.getText().toString());
+                if (TextUtils.isEmpty(edtUsername.getText().toString().trim())) {
+                    edtUsername.setError("Username cannot be empty");
+                } else if (TextUtils.isEmpty(edtPassword.getText().toString().trim())) {
+                    edtPassword.setError("Password cannot be empty");
+                } else {
+                    validateCredentials(edtUsername.getText().toString(), edtPassword.getText().toString());
+                }
             }
         });
 
