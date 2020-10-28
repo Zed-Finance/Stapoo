@@ -112,7 +112,6 @@ public class JourneyActivity extends AppCompatActivity implements View.OnClickLi
                     Toast.makeText(getApplicationContext(), "Please complete previous day's tasks", Toast.LENGTH_LONG).show();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
