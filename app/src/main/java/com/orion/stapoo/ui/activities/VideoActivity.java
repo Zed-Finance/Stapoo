@@ -112,7 +112,7 @@ public class VideoActivity extends AppCompatActivity {
                         FirebaseDatabase.getInstance().getReference().child("subjects").child(subject).child(day).child("watchList").setValue(watchList).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                int color = Color.parseColor("#FF76C8");
+                                int color = Color.parseColor("#B02243");
                                 gotoQuiz.getBackground().mutate().setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC));
                                 gotoQuiz.setEnabled(true);
                             }

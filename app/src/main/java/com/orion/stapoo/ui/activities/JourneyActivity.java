@@ -2,6 +2,7 @@ package com.orion.stapoo.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -47,10 +48,11 @@ public class JourneyActivity extends AppCompatActivity implements View.OnClickLi
         speaker.setOnClickListener(this);
         home.setOnClickListener(this);
 
-        Button levelOne = findViewById(R.id.level_1);
-        Button levelTwo = findViewById(R.id.level_2);
-        Button levelThree = findViewById(R.id.level_3);
-        Button levelFour = findViewById(R.id.level_4);
+        CardView levelOne = findViewById(R.id.level1);
+        CardView levelTwo = findViewById(R.id.level2);
+        CardView levelThree = findViewById(R.id.level3);
+        CardView levelFour = findViewById(R.id.level4);
+        CardView levelFive = findViewById(R.id.level5);
 
         levelOne.setOnClickListener(this);
 
@@ -59,28 +61,34 @@ public class JourneyActivity extends AppCompatActivity implements View.OnClickLi
         levelThree.setOnClickListener(this);
 
         levelFour.setOnClickListener(this);
+
+        levelFive.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.level_1:
+            case R.id.level1:
                 day = 0;
                 Intent intent = new Intent(getApplicationContext(), TaskActivity.class);
                 intent.putExtra("subject", subject);
                 intent.putExtra("day", day.toString());
                 startActivity(intent);
                 break;
-            case R.id.level_2:
+            case R.id.level2:
                 day = 1;
                 checkPrevProgressAndNavigate(day.toString(), String.valueOf(day - 1));
                 break;
-            case R.id.level_3:
+            case R.id.level3:
                 day = 2;
                 checkPrevProgressAndNavigate(day.toString(), String.valueOf(day - 1));
                 break;
-            case R.id.level_4:
+            case R.id.level4:
                 day = 3;
+                checkPrevProgressAndNavigate(day.toString(), String.valueOf(day - 1));
+                break;
+            case R.id.level5:
+                day = 4;
                 checkPrevProgressAndNavigate(day.toString(), String.valueOf(day - 1));
                 break;
             case R.id.home:
@@ -112,6 +120,7 @@ public class JourneyActivity extends AppCompatActivity implements View.OnClickLi
                     Toast.makeText(getApplicationContext(), "Please complete previous day's tasks", Toast.LENGTH_LONG).show();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

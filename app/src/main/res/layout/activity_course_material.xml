@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitStart"
-        android:src="@drawable/ic_blue_bg"
+        android:src="@drawable/ic_purple_bg"
         app:layout_constraintEnd_toEndOf="@id/imageView3"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@id/imageView3" />

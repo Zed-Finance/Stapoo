@@ -60,18 +60,19 @@ public class LoginActivity extends AppCompatActivity {
                 userList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
-                    if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                        Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
-                        prefManager.setIsLoggedIn(true);
-                        prefManager.setUsername(username);
-                        startActivity(new Intent(getApplicationContext(), AvatarActivity.class));
-                        finish();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
+                    //userList.add(user);
+                    assert user != null;
+                    if(user.getUsername().equals(username)){
+                        if(user.getPassword().equals(password)){
+                            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
+                            prefManager.setIsLoggedIn(true);
+                            prefManager.setUsername(username);
+                            startActivity(new Intent(getApplicationContext(), AvatarActivity.class));
+                            finish();
+                        }
                     }
                 }
-
-
+                Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
             }
 
             @Override

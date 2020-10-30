@@ -21,8 +21,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Let's see\n how you did"
         android:textColor="@android:color/white"
@@ -36,7 +36,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
@@ -119,8 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:background="@android:color/holo_green_light"
-                android:enabled="false"
+                android:background="#076B3A"
                 android:padding="16dp"
                 android:text="Go back to My Tasks"
                 android:textAllCaps="false"

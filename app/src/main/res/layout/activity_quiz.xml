@@ -28,14 +28,13 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="12dp"
             android:fontFamily="@font/poppins_medium"
             android:text="It is\nQuiz Time"
             android:textColor="@android:color/white"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.091"
+            app:layout_constraintHorizontal_bias="0.059"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -255,6 +254,7 @@
                 <ProgressBar
                     android:id="@+id/progress"
                     style="?android:progressBarStyleHorizontal"
+                    android:indeterminateTint="#076B3A"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -280,28 +280,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:background="#A9DB52"
+                android:background="#076B3A"
                 android:padding="16dp"
                 android:text="SUBMIT"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_quiz_bottom" />
-
-
+                android:layout_marginTop="32dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_bottom_illustration" />
 
         </LinearLayout>
 
     </ScrollView>
-
 
 </LinearLayout>

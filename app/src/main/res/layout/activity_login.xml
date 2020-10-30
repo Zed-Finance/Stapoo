@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitStart"
-        android:src="@drawable/ic_blue_background"
+        android:src="@drawable/ic_purple_background"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
@@ -63,7 +63,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="#75E0F0"
+                android:background="#893B9D"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:text="Let's Go"
