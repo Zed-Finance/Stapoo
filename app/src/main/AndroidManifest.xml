@@ -26,27 +26,44 @@
                 </meta-data>
             </provider>
 
-        <activity android:name=".ui.activities.CourseMaterialActivity"/>
-        <activity android:name=".ui.activities.ToolkitVideoPlayActivity" />
-        <activity android:name=".ui.activities.ToolkitActivity" />
-        <activity android:name=".ui.activities.UploadProofActivity" />
-        <activity android:name=".ui.activities.VideoActivity" />
-        <activity android:name=".ui.activities.HomeActivity" />
-        <activity android:name=".ui.activities.TaskActivity" />
-        <activity android:name=".ui.activities.JourneyActivity" />
-        <activity android:name=".ui.activities.LearnActivity" />
-        <activity android:name=".ui.activities.AvatarActivity" />
-        <activity android:name=".ui.activities.LoginActivity" />
-        <activity android:name=".ui.activities.SplashScreenActivity">
+        <activity android:name=".ui.activities.CourseMaterialActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.ToolkitVideoPlayActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.ToolkitActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.UploadProofActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.VideoActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ui.activities.HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.TaskActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.JourneyActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.LearnActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.AvatarActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".ui.activities.ResultActivity" />
-        <activity android:name=".ui.activities.QuizActivity" />
-        <activity android:name=".ui.activities.MainActivity" />
+        <activity android:name=".ui.activities.ResultActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.QuizActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activities.MainActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"

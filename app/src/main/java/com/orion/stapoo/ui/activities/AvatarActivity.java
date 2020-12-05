@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.orion.stapoo.R;
 import com.orion.stapoo.utils.PrefManager;
 
 public class AvatarActivity extends AppCompatActivity implements View.OnClickListener {
 
     PrefManager prefManager;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class AvatarActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_avatar);
 
         prefManager = new PrefManager(this);
+        userRef = FirebaseDatabase.getInstance().getReference().child("users").child(prefManager.getUsername());
 
         ImageView avatar1 = findViewById(R.id.avatar_1);
         ImageView avatar2 = findViewById(R.id.avatar_2);
@@ -28,14 +32,13 @@ public class AvatarActivity extends AppCompatActivity implements View.OnClickLis
         ImageView avatar4 = findViewById(R.id.avatar_4);
 
 
-        ImageView speaker=findViewById(R.id.speaker);
+        ImageView speaker = findViewById(R.id.speaker);
 
         avatar1.setOnClickListener(this);
         avatar2.setOnClickListener(this);
         avatar4.setOnClickListener(this);
         avatar3.setOnClickListener(this);
 
-        Toast.makeText(this, prefManager.getChosenAvatar() + "", Toast.LENGTH_LONG).show();
 
     }
 
@@ -50,21 +53,25 @@ public class AvatarActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.avatar_1:
                 prefManager.setAvatar(0);
                 prefManager.setIsAvatarChosen(true);
+                userRef.child("avatar").setValue(0);
                 navigateFurther();
                 break;
             case R.id.avatar_2:
                 prefManager.setAvatar(1);
                 prefManager.setIsAvatarChosen(true);
+                userRef.child("avatar").setValue(1);
                 navigateFurther();
                 break;
             case R.id.avatar_3:
                 prefManager.setAvatar(2);
                 prefManager.setIsAvatarChosen(true);
+                userRef.child("avatar").setValue(2);
                 navigateFurther();
                 break;
             case R.id.avatar_4:
                 prefManager.setAvatar(3);
                 prefManager.setIsAvatarChosen(true);
+                userRef.child("avatar").setValue(3);
                 navigateFurther();
                 break;
         }

@@ -70,6 +70,7 @@ public class UploadProofActivity extends AppCompatActivity {
         imgProofPic = findViewById(R.id.uploaded_img);
         Button btnUpload = findViewById(R.id.btn_upload);
         Button btnChoose = findViewById(R.id.btn_choose);
+        Button btnPick = findViewById(R.id.btn_pick);
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
         subject = getIntent().getStringExtra("subject");
@@ -81,6 +82,17 @@ public class UploadProofActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (checkPermission()) {
                     openCameraIntent();
+                } else {
+                    requestPermission();
+                }
+            }
+        });
+
+        btnPick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkPermission()) {
+                    chooseImage();
                 } else {
                     requestPermission();
                 }
@@ -141,6 +153,14 @@ public class UploadProofActivity extends AppCompatActivity {
 
     }
 
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), 2);
+    }
+
+
     private void openCameraIntent() {
         Intent pictureIntent = new Intent(
                 MediaStore.ACTION_IMAGE_CAPTURE);
@@ -163,13 +183,6 @@ public class UploadProofActivity extends AppCompatActivity {
     }
 
 
-    private void chooseImage() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), 1);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -177,11 +190,13 @@ public class UploadProofActivity extends AppCompatActivity {
         if (requestCode == 1) {
             //don't compare the data to null, it will always come as  null because we are providing a file URI, so load with the imageFilePath we obtained before opening the cameraIntent
             Glide.with(this).load(filePath).into(imgProofPic);
-
             // If you are using Glide.
+        } else if (requestCode == 2) {
+            assert data != null;
+            filePath = String.valueOf(data.getData());
+            uploadImage();
         }
-
-        /*if (requestCode == 1 && resultCode == RESULT_OK) {
+      /*  if (requestCode == 1 && resultCode == RESULT_OK) {
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), Uri.parse(currentPhotoPath));
                 imgProofPic.setImageBitmap(RotateBitmap(bitmap,90f));
@@ -204,6 +219,20 @@ public class UploadProofActivity extends AppCompatActivity {
 
         }
     }*/
+
+    private void uploadImage() {
+        if (filePath != null) {
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), Uri.parse(filePath));
+                imageUri = Uri.parse(filePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            imgProofPic.setImageBitmap(bitmap);
+
+
+        }
+    }
 
     private boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(Objects.requireNonNull(getApplicationContext()), WRITE_EXTERNAL_STORAGE);

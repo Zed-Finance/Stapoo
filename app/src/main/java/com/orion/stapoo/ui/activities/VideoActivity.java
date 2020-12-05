@@ -23,6 +23,7 @@ import com.orion.stapoo.R;
 import com.orion.stapoo.utils.PrefManager;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
@@ -90,6 +91,24 @@ public class VideoActivity extends AppCompatActivity {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 youTubePlayer.loadVideo(videoId, 0);
+            }
+        });
+
+        youTubePlayerView.addFullScreenListener(new YouTubePlayerFullScreenListener() {
+            @Override
+            public void onYouTubePlayerEnterFullScreen() {
+                findViewById(R.id.imageView3).setVisibility(View.VISIBLE);
+                findViewById(R.id.textView3).setVisibility(View.VISIBLE);
+                gotoQuiz.setVisibility(View.GONE);
+                findViewById(R.id.imageView4).setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onYouTubePlayerExitFullScreen() {
+                findViewById(R.id.imageView3).setVisibility(View.VISIBLE);
+                findViewById(R.id.textView3).setVisibility(View.VISIBLE);
+                gotoQuiz.setVisibility(View.VISIBLE);
+                findViewById(R.id.imageView4).setVisibility(View.VISIBLE);
             }
         });
     }

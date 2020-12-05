@@ -3,6 +3,7 @@ package com.orion.stapoo.ui.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,6 +26,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
     List<User> userList;
     PrefManager prefManager;
+    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void validateCredentials(final String username, final String password) {
         FirebaseDatabase.getInstance().getReference().child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+            @SuppressLint("ShowToast")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 userList.clear();
@@ -62,17 +65,51 @@ public class LoginActivity extends AppCompatActivity {
                     User user = dataSnapshot.getValue(User.class);
                     //userList.add(user);
                     assert user != null;
-                    if(user.getUsername().equals(username)){
-                        if(user.getPassword().equals(password)){
-                            Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG).show();
+                    if (user.getUsername().equals(username)) {
+                        if (user.getPassword().equals(password)) {
+                            toast = Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_LONG);
+                            toast.show();
                             prefManager.setIsLoggedIn(true);
                             prefManager.setUsername(username);
-                            startActivity(new Intent(getApplicationContext(), AvatarActivity.class));
-                            finish();
+                            checkAndNavigate();
+                            break;
                         }
+                    }else{
+                        toast = Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG);
+                        toast.show();
                     }
                 }
-                Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
+          }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+//        toast.cancel();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //toast.cancel();
+    }
+
+    private void checkAndNavigate() {
+        FirebaseDatabase.getInstance().getReference().child("users").child(prefManager.getUsername()).child("avatar").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), AvatarActivity.class));
+                }
+                finish();
             }
 
             @Override
